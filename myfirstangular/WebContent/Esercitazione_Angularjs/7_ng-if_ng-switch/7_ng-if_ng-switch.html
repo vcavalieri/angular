@@ -1,0 +1,67 @@
+<html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+<title>ng-if_ng-switch</title>
+<body>
+    <h1>ng-if_ng-switch</h1>
+    <div ng-app="myApp">
+        
+        <div ng-controller="userController">
+            <p>Nome: <input type="text" ng-model="utente.nome"></p>
+            <p>Cognome: <input type="text" ng-model="utente.cognome"></p>
+            <p ng-if="utente.nome || utente.cognome">{{saluta()}}</p>
+        </div>
+        <!--La direttiva ng-if consente di visualizzare porzioni 
+    dell’interfaccia utente in base ad una condizione booleana-->
+
+        <script type="text/javascript">
+            angular.module("myApp", [])
+                .controller("userController",
+                    function ($scope) {
+                        $scope.utente = { nome: "Mario", cognome: "Rossi" };
+                        $scope.saluta = function () {
+                            return "Buongiorno " + $scope.utente.nome + " " + $scope.utente.cognome + "!"
+                        };
+
+                    })
+
+        </script>
+        <!--
+                 a differenza di ng-show che si limita a visualizzare o nascondere gli 
+                 elementi del DOM, ng-if elimina o crea dinamicamente gli elementi del DOM 
+                 in base alla condizione associata
+            -->
+   
+----------------------------------------------------------------------------------------------------
+
+        
+    
+    
+    <p>Colore: <input type="text" ng-model="colore"></p>
+        <div ng-switch="colore">
+            <span ng-switch-when="rosso" style="color:red">{{colore}}</span>
+            <span ng-switch-when="verde" style="color:green">{{colore}}</span>
+            <span ng-switch-when="blu"   style="color:blue">{{colore}}</span>
+            <span ng-switch-default      style="color:black">{{colore}}</span>
+        </div>
+<!--
+    La direttiva ng-switch seleziona la porzione di interfaccia 
+    da visualizzare in base al confronto tra una espressione di 
+    controllo ed un elenco di possibili valori.
+
+
+    ng-switch seleziona l’output da mostrare coincide con il modello 
+    della casella di testo. 
+    Gli attributi ng-switch-when consentono di associare ad un valore 
+    della variabile colore il relativo codice HTML da mostrare, 
+    mentre l’attributo ng-switch-default definisce il codice HTML 
+    da considerare quando non viene trovata una corrispondenza con i valori previsti.
+
+    Come avviene per ng-if, anche ng-switch non si limita a visualizzare porzioni del DOM, 
+    ma si occupa di creare o rimuovere dinamicamente elementi dalla struttura della pagina.
+-->
+
+
+</div>
+</body>
+</html>

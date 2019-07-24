@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<title>AngularJs ng-include Directive Example</title>
+
+ <script src="../script/angular.js"></script>
+
+<script>
+	var app = angular.module("AngularngincludeApp", []);
+
+	app.controller("ngincludectrl", function($scope) {
+
+		$scope.items = [ '--select--', './sampleA.html', './sampleB.html' ];
+
+		$scope.selectval = "--select--";
+
+	});
+</script>
+<script type="text/ng-template" id="'./sampleB.html'">
+ 
+   
+</script>
+
+</head>
+
+<body ng-app="AngularngincludeApp">
+
+	<div ng-controller="ngincludectrl">
+
+		Select Item: <select ng-model="selectval"
+			ng-options="item for item in items">
+
+		</select> <br /> <br />
+
+		<div style="border: 1px solid #000; padding: 10px; width: 20%">
+
+			<div ng-include="selectval"></div>
+
+
+		</div>
+
+	</div>
+
+</body>
+
+</html>

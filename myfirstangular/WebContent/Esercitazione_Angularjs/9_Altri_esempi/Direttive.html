@@ -1,0 +1,69 @@
+<html>
+<title>Direttive</title>
+<!--In Generale Angular è un Framework che trasforma HTML in un linguaggio per lo sviluppo di web application -->
+
+<body ng-app="myApp">
+    <!-- con ng-app indico quale elemento della pagina va preso in considerazione per usarlo come interfaccia API -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <!-- questo è l' URL del file download di Angular -->
+    <h1>SOMMA</h1>
+    
+    <script>type = "text/javascript"
+
+        angular.module("myApp", [])
+            .controller("userController", function ($scope) {
+
+
+                $scope.somma = function () {
+                    $scope.risultato = $scope.numero1 + $scope.numero2;
+                };
+                $scope.somma2 = function (x, y, $event) {
+                    $scope.risultato2 = x + y;
+                    console.log("È stato cliccato alla posizione " + $event.clientX + ", " + $event.clientY);
+                };
+            });
+
+    </script>
+
+
+
+    <div ng-controller="userController">
+        <input type="number" ng-model="numero1" />
+        +
+        <input type="number" ng-model="numero2" />
+        =
+        <input type="number" ng-model="risultato" />
+
+        <button ng-click="somma()">Somma</button></br>
+
+
+
+
+
+        <!-- l’assegnamento associato all’attributo onclick verrebbe eseguito
+             nel classico contesto JavaScript e quindi alla variabile risultato verrebbe 
+             associata la somma delle variabili numero1 e numero2. 
+             Ma queste variabili non corrispondono alle variabili di scope del controller corrente, 
+             quindi non viene gestito il data binding. 
+             Al contrario, la direttiva ng-click esegue l’assegnamento nel contesto Angular, 
+             garantendo tutti gli automatismi previsti dal framework.-->
+
+        ADESSO FACCIAMO LA SOMMA LATO SERVER </br>
+
+
+
+
+        <button ng-click="somma2(5, 2, $event)">Somma2</button>
+        <input type="number" ng-model="risultato2" />
+
+
+
+        <!--Se abbiamo necessità di accedere ad informazioni specifiche 
+            riguardanti l’evento, possiamo passare alla funzione l’oggetto $event: passandola
+        direttamente al metodo.
+    In questo caso anche i parametri sono passati in ng-click.-->
+
+
+</body>
+
+</html>

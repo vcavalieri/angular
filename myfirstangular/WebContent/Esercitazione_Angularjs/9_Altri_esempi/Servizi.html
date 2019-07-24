@@ -1,0 +1,65 @@
+<html>
+<title>Servizi</title>
+<!--In Generale Angular è un Framework che trasforma HTML in un linguaggio per lo sviluppo di web application -->
+
+<body ng-app="myApp">
+
+		<a name="html">HTML Tutorial</a><br>
+		
+
+	<!-- con ng-app indico quale elemento della pagina va preso in considerazione per usarlo come interfaccia API -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+	<!-- questo è l' URL del file download di Angular -->
+	
+	
+    <h1>Servizi</h1>
+    <script>type = "text/javascript"
+    
+    angular.module("myApp",[])
+	.service('somma1', function() {
+		this.somma = function(a,b) { return  a + b};
+	})
+//il service è un metodo che mi restituisce un oggetto 
+
+	.factory('moltiplicazione', function() {
+		return function(a, b) { return a * b;}
+	})
+//la factory mi restituisce direttamente la funzione
+    
+	.controller('myController',
+    	function($scope, somma1, moltiplicazione) {
+			$scope.somma = function() {
+				document.anchors[0].innerHTML = 'Sto Addizionando'	
+               $scope.result = somma1.somma($scope.number,$scope.number2);
+            }
+    		$scope.moltiplicazione=function(){
+
+			document.anchors[0].innerHTML = 'Sto Moltiplicando'	
+    		$scope.result2 = moltiplicazione($scope.number,$scope.number2)
+		}
+  	});
+</script>
+<!--per andare a richiamare Service e Factory all'interno del mio controller 
+devo creare uno scope del metodo nel quale vado a definire un altro scope
+che nel caso del service mi serve  a richiamare l'oggetto della service;
+mentre nel caso della Factory vado a richiamare il metodo vero e proprio
+-->
+ <div ng-controller='myController'>
+	 
+ 
+	 SOMMA CON IL  METODO SERVICE
+	 <p>Enter a number: <input type = "number" ng-model = "number" /></p>
+	 <p>Enter a number: <input type = "number" ng-model = "number2" /></p>
+	 <button ng-click = "somma()">sommaService</button>
+	 <button ng-click = "moltiplicazione()">moltiplicazioneFactory</button>
+		 <p>Result: {{result}}</p>
+		 <p>Result2: {{result2}}</p>
+ </div>
+ <!--
+avendo definito una variabile risultato per entrambe le casistiche 
+vado a porla pari ai valori di input inseriti dall'utente
+ -->
+ 
+
+</body>
+</html>

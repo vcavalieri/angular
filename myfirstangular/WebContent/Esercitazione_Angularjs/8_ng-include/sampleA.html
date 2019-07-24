@@ -1,0 +1,30 @@
+<html>
+    <!-- tipo di file -->
+<title>Hello Angular</title>
+<!--titolo visto in icona-->
+<body>
+	
+ <script src="../script/angular.js"></script>
+ <!--url del download di Angular -->
+ 
+    <h1>Hello Angular</h1>
+    <!--titolo visto in pagina-->
+<div ng-app>
+    <!-- con ng-app il mio sistema capisce dove andare a interpretare Angular-->
+    <p>Inserisci il tuo nome: <input type="text" ng-model="name"></p>
+    <!-- ng-model associa ciò che ha inserito l'utente nella casella di testo
+         ad una variabile intitolata "name"-->
+    <p>Hello {{name}}!</p>
+    <!-- 
+        {{name}} sta ad indicare il riferimento alla variabile creata con ng-model
+        inoltre entra in azione il DATABINDING che nel caso di Angular è di tipo
+        two way ovvero se l'utente modifica il valore di una variabile essa viene
+        aggiornata automaticamente,difatti cambiando di volta in volta il nome inserito
+        la view cambia e viceversa.    
+    -->
+    
+</div>
+
+
+</body>
+</html>

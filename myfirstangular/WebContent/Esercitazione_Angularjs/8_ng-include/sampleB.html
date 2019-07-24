@@ -1,0 +1,15 @@
+<html>
+<title>Servizi</title>
+<!--In Generale Angular è un Framework che trasforma HTML in un linguaggio per lo sviluppo di web application -->
+
+<p>Colore: <input type="text" ng-model="colore"></p>
+        <div ng-switch="colore">
+            <span ng-switch-when="rosso" style="color:red">{{colore}}</span>
+            <span ng-switch-when="verde" style="color:green">{{colore}}</span>
+            <span ng-switch-when="blu"   style="color:blue">{{colore}}</span>
+            <span ng-switch-default      style="color:black">{{colore}}</span>
+        </div>
+ 
+
+
+</html>

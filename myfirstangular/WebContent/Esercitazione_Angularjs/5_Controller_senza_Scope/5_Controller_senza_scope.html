@@ -1,0 +1,44 @@
+<html>
+
+<title>Controller_Senza_Scope</title>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+
+
+CONTROLLER SENZA SCOPE 
+
+<body ng-app="myApp2">
+
+
+<div ng-controller="userController2 as userCtrl">
+        <p>Nome: <input type="text" ng-model="userCtrl.utente2.nome"></p>
+        <p>Cognome: <input type="text" ng-model="userCtrl.utente2.cognome"></p>
+        <p ng-controller="greetingController2 as greetingCtrl">{{greetingCtrl.saluta(userCtrl.utente2)}}</p>
+    </div>
+    <!--
+        In pratica associamo una sorta di alias al controller 
+        tramite il costrutto controller as ed utilizziamo questo alias 
+        per accedere al modello dei dati ed ai metodi.
+    -->
+    
+    <script type="text/javascript">
+    angular.module("myApp2", [])
+        .controller("userController2",
+            function() {
+                this.utente2 = {nome: "Mario", cognome: "Rossi"};
+            })
+        .controller("greetingController2",
+            function() {
+                this.saluta = function(utente2) {
+                    return "Buongiorno " + utente2.nome + " " + utente2.cognome + "!"
+                };
+            });
+    </script>
+    
+<!--
+    abbiamo dovuto modificare la definizione del metodo saluta() 
+    prevedendo il passaggio dell’oggetto utente per sopperire 
+    alla mancanza dell’ereditarietà degli scope
+-->
+
+</body>
+</html>

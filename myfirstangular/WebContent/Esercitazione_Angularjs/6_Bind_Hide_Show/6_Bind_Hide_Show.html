@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+
+<html>
+
+<title>Bind_Hide_Show</title>
+<script src="../script/angular.js"></script>
+
+
+<body>
+    <div ng-app="">
+        <!--
+        lasciando ng-app="vuoto" è come se generasse il controller in automatico (default)
+    -->
+        <title>ng-bind</title>
+
+
+        <div ng-init="myText='Hello'">
+
+            <p ng-bind="myText"></p>
+            <!--
+        ng-bind mi indica di sostituire il contenuto di un elemento html con il valore
+        di una variabile data o un'espressione.
+    -->
+
+
+
+            <p ng-bind=2+3></p>
+            <span>{{ 2+ 3 }}</span> <br/>
+            <!--
+      queste 2 espressioni fanno fondamentalmente la stessa cosa restituiscono 5 alla view.
+      (lo <span> tag permette di agganciare una parte di testo o di un documento.)
+  -->
+        </div>
+        ---------------------------------------------------------------------------------------------------
+        <title>ng-hide/ng-show</title>
+        <div ng-show="false">Questo è un test</div>
+        <div ng-hide="true">Questo è un test</div>
+        <!--
+    Le direttive ng-show e ng-hide 
+    consentono di visualizzare o meno elementi 
+    sulla pagina in base alla valutazione di una espressione. 
+    Come è facile intuire, le due direttive hanno lo stesso 
+    effetto ma si basano su condizioni booleane opposte
+    
+    in entrambi i casi il div non sarà visualizzato
+-->
+    </div>
+    <div ng-app="myApp">
+        <div ng-controller="userController">
+            <p>Nome: <input type="text" ng-model="utente.nome"></p>
+            <p>Cognome: <input type="text" ng-model="utente.cognome"></p>
+            <p ng-show="utente.nome || utente.cognome">{{saluta()}}</p>
+        </div>
+        <script type="text/javascript">
+            var app = angular.module('myApp', [])
+                .controller("userController",
+                    function ($scope) {
+                        $scope.utente = { nome: "Mario", cognome: "Rossi" };
+                        $scope.saluta = function () {
+                            return "Buongiorno " + $scope.utente.nome + " " + $scope.utente.cognome + "!"
+                        };
+
+                    });
+            angular.bootstrap(document, ['myApp']);
+
+        </script>
+        <!--
+                riprendendo l’esempio introdotto nelle puntate precedenti, 
+                potremmo visualizzare il saluto all’utente soltanto quando è stato inserito 
+                almeno un nome o un cognome nelle rispettive caselle di testo
+            -->
+
+        <!--                <script>
+                                var app = angular.module('demo', [])
+                                    .controller('WelcomeController', function ($scope) {
+                                        $scope.greeting = 'Welcome!';
+                                    });
+                                angular.bootstrap(document, ['demo']);
+                            </script>
+la funzione bootstrap mi permette di poter effettuare più applicazioni Angular sullo stesso
+file html...è consigliabile però non utilizzarla all'interno di  div contenenti ng-if,
+ng-include,ng-View
+( Do not bootstrap the app on an element with a directive 
+that uses transclusion, such as ngIf, ngInclude and ngView. 
+Doing this misplaces the app $rootElement and the app's injector, 
+causing animations to stop working and making the injector 
+inaccessible from outside the app. )
+Ref:AngularJSwebsite.
+                        -->
+    </div>
+</body>
+
+</html>
